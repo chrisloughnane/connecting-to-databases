@@ -1,10 +1,14 @@
 <?php
+
 /****
-* A simple example of PDO connection to a MySQL database
-* 
-* Chris Loughnane
-* 
-*/
+*	A simple example of PDO connection to a MySQL database using object.
+*
+*	Author: Chris Loughnane 
+*	Email: chris.loughnane@gmx.com
+*	Porfolio: http://portfolio.chrisloughnane.com/
+*	Date: 22/03/2015
+*
+****/
 
 /****
 * Conenction parameters
@@ -21,7 +25,7 @@ $password = "chris";
 */
 $table = "simple_example";
 
-
+echo "<h3>Simple PDO MySQL database connection example</h3>";
 /****
 * Make connection to the database
 */
@@ -48,7 +52,23 @@ populateTable($table);
 
 displayhRows($table);
 
+function dropTable($table)
+{
+	global $db;
 
+	/****
+	* Drop(delete) the table if it already exists.
+	*/
+	try{
+		$sql=$db->prepare("DROP TABLE $table");
+		$sql->execute();
+
+		echo "<br><b>" . $table . "</b> table dropped successfully"; 
+
+	}catch(PDOException $e) {
+		echo "<br>" . $e->getMessage();
+	}
+}
 
 function createTable($table)
 {
@@ -67,25 +87,6 @@ function createTable($table)
 	}catch(PDOException $e) {
 	    echo "<br>" . $e->getMessage();//Remove or change message in production code
 	}
-}
-
-function dropTable($table)
-{
-	global $db;
-
-	/****
-	* Drop(delete) the table if it already exists.
-	*/
-	try{
-		$sql=$db->prepare("DROP TABLE $table");
-		$sql->execute();
-
-		echo "<br><b>" . $table . "</b> table dropped successfully"; 
-
-	}catch(PDOException $e) {
-		echo "<br>" . $e->getMessage();
-	}
-
 }
 
 function populateTable($table){
