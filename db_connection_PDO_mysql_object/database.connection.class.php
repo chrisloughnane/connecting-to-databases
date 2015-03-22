@@ -14,10 +14,11 @@ class DatabaseConnection {
 
     protected static $connection;
     
-    public function connect() {
+    public function connect(){
         
         // Try and connect to the database
-        if(!isset(self::$connection)) {
+        if(!isset(self::$connection))
+        {
 
         	include 'database.connection.settings.php';
 
@@ -30,15 +31,16 @@ class DatabaseConnection {
         }
     
         // If connection was not successful, handle the error
-        if(self::$connection === false) {
+        if(self::$connection === false)
+        {
             // Handle error - notify administrator, log to a file, show an error screen, etc.
             return false;
         }
         return self::$connection;
     }
     
-    public function query($query){
-
+    public function query($query)
+    {
         $connection = $this -> connect();
 
         $result=$connection->prepare($query);
@@ -47,33 +49,36 @@ class DatabaseConnection {
         return $result;
     }
     
-    public function select($query) {
-
+    public function select($query)
+    {
         $rows = array();
         $result = $this -> query($query);
-        if($result === false) {
+        if($result === false)
+        {
             return false;
         }
 
-        while ($row = $result -> fetch()) {
+        while ($row = $result -> fetch())
+        {
             $rows[] = $row;
         }
         return $rows;
     }
     
-    public function error() {
+    public function error()
+    {
         $connection = $this -> connect();
         print_r($connection->errorInfo());
     }
 
-    public function quote($value) {
+    public function quote($value)
+    {
         $connection = $this -> connect();
         return "'" . $connection -> real_escape_string($value) . "'";
     }
 
-    public function test($query){
-
-
+    public function test($query)
+    {
         $connection = $this -> connect();
 
         $statement=$connection->prepare($query);
@@ -84,7 +89,8 @@ class DatabaseConnection {
         /****
         * Note the column fields are case sensitive!
         */
-        while($row=$statement->fetch()) {
+        while($row=$statement->fetch())
+        {
             echo "<br><b>" . $row['Name'] . "</b> is " . $row['Gender'];
         }
     }

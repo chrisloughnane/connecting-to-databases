@@ -34,14 +34,11 @@ populateTable($table);
 
 displayhRows($table);
 
-
-
 function createTable($table)
 {
 	global $db;
 
 	try{
-
 		$sql ="CREATE TABLE IF NOT EXISTS $table(
 			ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
 			Name VARCHAR( 50 ) NOT NULL, 
@@ -74,12 +71,11 @@ function dropTable($table)
 
 }
 
-function populateTable($table){
-
+function populateTable($table)
+{
 	global $db;
 
 	try{
-		# Insert values to our database
 		$val = "INSERT INTO $table (name, gender)
 		VALUES
 			('Bjarne', 'male'),
@@ -100,8 +96,8 @@ function populateTable($table){
 	}
 }
 
-function displayhRows($table) {
-
+function displayhRows($table)
+{
 	global $db;
 
 	try{

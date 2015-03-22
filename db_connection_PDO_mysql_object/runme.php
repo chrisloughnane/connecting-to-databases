@@ -44,7 +44,7 @@ function dropTable($table)
 
 		echo "<br><b>" . $table . "</b> table dropped successfully"; 
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 		echo "<br>" . $e->getMessage();
 	}
 }
@@ -54,7 +54,6 @@ function createTable($table)
 	global $db;
 
 	try{
-
 		$sql ="CREATE TABLE IF NOT EXISTS $table(
 			ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
 			Name VARCHAR( 50 ) NOT NULL, 
@@ -67,13 +66,13 @@ function createTable($table)
 
 		echo "<br><b>" . $table . "</b> table created successfully";
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 	    echo "<br>" . $e->getMessage();//Remove or change message in production code
 	}
 }
 
-function populateTable($table){
-
+function populateTable($table)
+{
 	global $db;
 
 	try{
@@ -98,18 +97,16 @@ function populateTable($table){
 
 		echo '<br>Created ' . $count[0][0] . ' row(s) in <b>' . $table . "</b> table.";
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 	    echo "<br>" . $e->getMessage();//Remove or change message in production code
 	}
 }
 
-
-function displayhRows($table) {
-
+function displayhRows($table)
+{
 	global $db;
 
-	try
-	{
+	try{
 	    $rows = $db -> select("SELECT * FROM " . $table);
 
 	    echo "<br><br><h3>The following rows were found in the database.</h3>";
@@ -122,8 +119,7 @@ function displayhRows($table) {
 	        echo "<br><b>" . $row['Name'] . "</b> is " . $row['Gender'];
 		endforeach;
 	}
-	catch (PDOException $e)
-	{
+	catch (PDOException $e){
 		$error = 'Error getting data.' . $e->getMessage();
 		include 'error.html.php';
 	}

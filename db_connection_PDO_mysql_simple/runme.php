@@ -19,7 +19,6 @@ $database = "connectionexamples";
 $username = "chris";
 $password = "chris";
 
-
 /****
 * Table name you want to use
 */
@@ -33,8 +32,7 @@ try{
 	$db = new PDO('mysql:host=' . $location . ';dbname=' . $database . ';charset=utf8', $username, $password);
 	echo '<h3>Connected to <b>' . $location . '</b></h3>';
 }
-catch (PDOException $e)
-{
+catch (PDOException $e){
 	$e->getMessage();
 }
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -65,7 +63,7 @@ function dropTable($table)
 
 		echo "<br><b>" . $table . "</b> table dropped successfully"; 
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 		echo "<br>" . $e->getMessage();
 	}
 }
@@ -75,7 +73,6 @@ function createTable($table)
 	global $db;
 
 	try{
-
 		$sql ="CREATE TABLE IF NOT EXISTS $table(
 			ID INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
 			Name VARCHAR( 50 ) NOT NULL, 
@@ -84,13 +81,13 @@ function createTable($table)
 
 		echo "<br><b>" . $table . "</b> table created successfully";
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 	    echo "<br>" . $e->getMessage();//Remove or change message in production code
 	}
 }
 
-function populateTable($table){
-
+function populateTable($table)
+{
 	global $db;
 
 	try{
@@ -110,13 +107,13 @@ function populateTable($table){
 		// Check how many rows we added.
 		echo '<br>Created ' . $count . ' row(s) in <b>' . $table . "</b> table.";
 
-	}catch(PDOException $e) {
+	}catch(PDOException $e){
 	    echo "<br>" . $e->getMessage();//Remove or change message in production code
 	}
 }
 
-function displayhRows($table) {
-
+function displayhRows($table)
+{
 	global $db;
 
 	try{
@@ -126,7 +123,7 @@ function displayhRows($table) {
 
 		echo "<br><br><h3>The following rows were found in the database.</h3>";
 
-		while($row=$statement->fetch()) {
+		while($row=$statement->fetch()){
 			echo "<br><b>" . $row['name'] . "</b> is " . $row['gender'];
 		}
 
