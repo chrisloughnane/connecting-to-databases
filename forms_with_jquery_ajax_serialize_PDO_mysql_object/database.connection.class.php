@@ -27,7 +27,6 @@ class DatabaseConnection {
             self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-            echo '<h3>Connected to <b>' . $location . '</b></h3>';
         }
     
         // If connection was not successful, handle the error
