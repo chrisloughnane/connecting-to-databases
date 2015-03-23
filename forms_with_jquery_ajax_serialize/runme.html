@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+$("document").ready(function(){
+  $(".js-ajax-php-json").submit(function(){
+    var data = {
+      "action": "example"
+    };
+    data = $(this).serialize() + "&" + $.param(data);
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "handle.request.ajax.php", //Relative or absolute path to handle.request.ajax file
+      data: data,
+      success: function(data) {
+        $(".the-return").html(
+          "First Name: " + data["FirstName"] + "<br />Second Name: " + data["SecondName"] + "<br />Gender: " + data["gender"] + "<br />JSON: " + data["json"]
+        );
+
+        alert("Form submitted successfully.\nReturned json: " + data["json"]);
+      }
+    });
+    return false;
+  });
+});
+</script>
+</head>
+<body>
+
+<form action="return.php" class="js-ajax-php-json" method="post" accept-charset="utf-8">
+  <input type="text" name="FirstName" value="" placeholder="Mickey" />
+  <input type="text" name="SecondName" value="" placeholder="Mouse" />
+  <select name="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <input type="submit" name="submit" value="Submit form"  />
+</form>
+ 
+<div class="the-return">
+Your inputs will be displayed here.
+</div>
+
+</body>
+</html>
+
